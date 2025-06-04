@@ -24,6 +24,18 @@ class DoublyLinkedList{
         }
     
     }
+    public void insertAtEnd(int data){
+        Node newNode = new Node(data);
+        if(head == null || tail == null){
+            head = newNode;
+            tail = newNode;
+        }
+        else{
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
+        }
+    }
     public void display(){
         Node temp = head;
         while(temp!= null){
@@ -37,9 +49,9 @@ class DoublyLinkedList{
 class Main{
     public static void main(String[] args){
         DoublyLinkedList dl = new DoublyLinkedList();
-        dl.insertAtBeg(10);
-        dl.insertAtBeg(20);
-        dl.insertAtBeg(4);
+        dl.insertAtEnd(10);
+        dl.insertAtEnd(20);
+        dl.insertAtEnd(4);
         dl.display();
     }
 }
