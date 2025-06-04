@@ -1,0 +1,81 @@
+import java.util.Scanner;
+class LinkedList{
+    static class Node{
+        int data;
+        Node next;
+        Node(int data){
+            this.data = data;
+        }
+    }
+    private Node head = null;
+    public void insertFromBeg(int data){
+        Node newNode = new Node(data);
+        newNode.next = head;
+        head = newNode;
+    }
+    public void insertFromEnd(int data){
+        Node newNode = new Node(data);
+        if(head == null){
+            head = newNode;
+        }
+        else{
+            Node temp = head;
+            while(temp.next != null){
+                temp = temp.next;
+            }
+            temp.next = newNode;
+        }
+        
+    }
+    public void display(){
+        Node temp = head;
+        while(temp != null){
+            System.out.print(temp.data + "->");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+    public int middle(){
+        if(head == null) return -1;
+        Node fast = head;
+        Node slow = head;
+        while(fast != null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow.data;
+    }
+    public void deleteLastKNode(int n){
+        if(head == null) return;
+        Node fast = head;
+        Node slow = head;
+        for(int i=0;i<n;i++){
+            fast = fast.next;
+        }
+        if(fast == null) {
+            head = head.next;
+            return;
+        }
+        while(fast.next != null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+    }
+}
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        LinkedList ll = new LinkedList();
+        ll.insertFromEnd(10);
+        ll.insertFromEnd(20);
+        ll.insertFromEnd(30);
+        ll.insertFromEnd(40);
+        ll.display();
+        System.out.println(ll.middle());
+        int num = sc.nextInt();
+        ll.deleteLastKNode(num);
+        ll.display();
+        
+    }
+}
